@@ -1,10 +1,5 @@
 # folders and files to be ignored by git
 
-############
-## Bones
-############
-
-Bones.esproj/
 
 ############
 ## IDEs
@@ -24,6 +19,7 @@ local.properties
 .cproject
 .buildpath
 nbproject/
+.env
 
 ############
 ## OSes
@@ -31,8 +27,24 @@ nbproject/
 
 [Tt]humbs.db
 [Dd]esktop.ini
-*.DS_store
-.DS_store?
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+########################
+## Composer, Bower & Node
+########################
+
+/vendor
+/vendor/*
+/assets/vendor/
+/assets/vendor/*
+/node_modules/
+/assets/node_modules/
 
 ############
 ## Misc
