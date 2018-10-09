@@ -13,8 +13,7 @@ module.exports = (env, argv) => {
   return {
     // Project entry point(s)
     entry: { 
-      theme: './assets/src/js/theme.js',
-      fontawesome: './assets/src/vendor/fontawesome.js' 
+      theme: './assets/src/js/plugin.js',
     },
 
     // Output directory
