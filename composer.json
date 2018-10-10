@@ -1,0 +1,17 @@
+{
+    "name": "nathan/mindbodypro",
+    "description": "Mindbody plugin for Wordpress",
+    "type": "wordpress plugin",
+    "config": {
+        "vendor-dir": "library/vendor"
+    },
+    "require": {
+        "devincrossman/mindbody-php-api": "^1.6"
+    },
+    "authors": [
+        {
+            "name": "Nathan Malachowski",
+            "email": "nathanmal@gmail.com"
+        }
+    ]
+}
