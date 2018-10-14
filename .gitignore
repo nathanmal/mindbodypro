@@ -41,6 +41,9 @@ Thumbs.db
 
 /vendor
 /vendor/*
+/library/vendor
+/library/vendor/
+/library/vendor/*
 /assets/vendor/
 /assets/vendor/*
 /node_modules/
