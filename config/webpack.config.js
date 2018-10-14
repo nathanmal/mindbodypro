@@ -13,7 +13,7 @@ module.exports = (env, argv) => {
   return {
     // Project entry point(s)
     entry: { 
-      theme: './assets/src/js/plugin.js',
+      mindbodypro: './assets/src/js/plugin.js',
     },
 
     // Output directory
@@ -91,6 +91,10 @@ module.exports = (env, argv) => {
         }),
         new OptimizeCSSAssetsPlugin({})
       ]
+    },
+
+    externals: {
+      jquery: 'jQuery'
     },
 
     // Plugins

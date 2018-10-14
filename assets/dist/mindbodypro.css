@@ -1,0 +1,124 @@
+@keyframes onAutoFillStart {
+  from {
+    /**/ }
+  to {
+    /**/ } }
+
+@keyframes onAutoFillCancel {
+  from {
+    /**/ }
+  to {
+    /**/ } }
+
+input:-webkit-autofill {
+  animation-name: onAutoFillStart;
+  transition: background-color 50000s ease-in-out 0s; }
+
+input:not(:-webkit-autofill) {
+  animation-name: onAutoFillCancel; }
+
+section#login, section#register {
+  min-height: 60vh;
+  margin-top: 120px;
+  margin-bottom: 7rem;
+  background: #eee;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 12px 27px rgba(0, 0, 0, 0.12); }
+  section#login h3, section#register h3 {
+    font-size: 1rem; }
+  section#login form, section#register form {
+    padding: 2rem;
+    text-align: center; }
+    section#login form .form-error, section#register form .form-error {
+      color: #E22;
+      padding: 1rem; }
+    section#login form .btn, section#register form .btn {
+      font-size: 1.2rem;
+      border-radius: 5rem;
+      letter-spacing: .1rem;
+      font-weight: 600;
+      padding: 1rem;
+      transition: all 0.2s;
+      text-transform: uppercase; }
+    section#login form .form-label-group, section#register form .form-label-group {
+      position: relative;
+      margin-bottom: 1rem;
+      text-align: left;
+      /* input[type="checkbox"] 
+      {
+        border:1px solid black;
+        appearance: none;
+        background-color: #fafafa;
+        border: 1px solid #cacece;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+        padding: 9px;
+        border-radius: 3px;
+        display: inline-block;
+        position: relative;
+      } */ }
+      section#login form .form-label-group input, section#register form .form-label-group input {
+        padding: 2rem 1rem 1rem 1.5rem;
+        border-radius: 2rem;
+        background: #f7f7f7; }
+        section#login form .form-label-group input::placeholder, section#register form .form-label-group input::placeholder {
+          color: transparent; }
+      section#login form .form-label-group label, section#register form .form-label-group label {
+        position: absolute;
+        user-select: none;
+        pointer-events: none;
+        top: 0;
+        padding-top: 0.75rem;
+        left: 1.5rem;
+        display: block;
+        width: 100%;
+        margin-bottom: 0;
+        /* Override default `<label>` margin */
+        line-height: 1.5;
+        color: #495057;
+        border: 1px solid transparent;
+        border-radius: .25rem;
+        transition: all .1s ease-in-out; }
+        section#login form .form-label-group label.filled, section#register form .form-label-group label.filled {
+          padding-top: 0.2rem;
+          padding-bottom: 1rem;
+          font-size: 0.8rem; }
+    section#login form .liability-waiver, section#register form .liability-waiver {
+      max-height: 200px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      text-align: left;
+      background: #f3f3f3;
+      font-size: 0.9rem;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      /* width */
+      /* Track */
+      /* Handle */
+      /* Handle on hover */ }
+      section#login form .liability-waiver::-webkit-scrollbar, section#register form .liability-waiver::-webkit-scrollbar {
+        width: 5px; }
+      section#login form .liability-waiver::-webkit-scrollbar-track, section#register form .liability-waiver::-webkit-scrollbar-track {
+        background: #f1f1f1; }
+      section#login form .liability-waiver::-webkit-scrollbar-thumb, section#register form .liability-waiver::-webkit-scrollbar-thumb {
+        background: #888; }
+      section#login form .liability-waiver::-webkit-scrollbar-thumb:hover, section#register form .liability-waiver::-webkit-scrollbar-thumb:hover {
+        background: #555; }
+
+section#schedule h2 {
+  font-size: 4rem;
+  text-align: center; }
+
+section#schedule .daily-schedule table.table {
+  margin-top: 1rem; }
+  section#schedule .daily-schedule table.table thead tr {
+    text-transform: uppercase; }
+    section#schedule .daily-schedule table.table thead tr th {
+      color: white;
+      background-color: black;
+      white-space: nowrap; }
+    section#schedule .daily-schedule table.table thead tr th:last-child {
+      text-align: right; }
+  section#schedule .daily-schedule table.table tbody tr td {
+    vertical-align: middle; }
+  section#schedule .daily-schedule table.table tbody tr td:last-child {
+    text-align: right; }
+

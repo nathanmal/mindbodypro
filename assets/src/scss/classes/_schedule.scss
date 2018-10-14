@@ -1,0 +1,50 @@
+section#schedule 
+{
+  h2 {
+    font-size:4rem;
+    text-align:center;
+  }
+
+
+  .daily-schedule 
+  {
+    table.table 
+    {
+      margin-top:1rem;
+      
+      thead 
+      {
+        tr {
+          text-transform: uppercase;
+          
+          th {
+            color:white;
+            background-color:$color-dark;
+            white-space: nowrap;
+          }
+
+          th:last-child {
+            text-align:right;
+          }
+        }
+      }
+
+
+      
+
+      tbody tr {
+
+        td {
+          vertical-align: middle;
+        }
+        td:last-child {
+          text-align:right;
+        }
+      }
+
+    }
+  
+
+
+  }
+}
