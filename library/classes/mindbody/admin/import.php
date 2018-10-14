@@ -2,7 +2,8 @@
 
 namespace Mindbody\Admin;
 
-use Mindbody\Admin\Page;
+use \Mindbody;
+use \Mindbody\Admin\Page;
 
 class Import extends Page
 {
@@ -10,16 +11,23 @@ class Import extends Page
 
   public $menu_title = 'Import';
   
-
   public function render_page_content()
   {
-    // \Mindbody\Cache::disable();
 
-    $classes = \Mindbody::getClasses();
-    
-    echo '<pre>';
-    var_dump($classes);
-    echo '</pre>';
+
+    $service = Mindbody::service('Staff');
+
+    $data = $service->GetStaff()->getData();
+
+    $service->printData();
+
+    $staff = $data->getStaffMembers()->getStaff();
+
+    foreach($staff as $staffmember)
+    {
+      echo $staffmember->getName() . '<br/>';
+    }
+
   }
 
 

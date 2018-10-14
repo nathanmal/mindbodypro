@@ -14,8 +14,8 @@ class API
     'appointment',
     'class',
     'client',
-    'data',
-    'finder',
+    // 'data',
+    // 'finder',
     'sale',
     'site',
     'staff'
@@ -37,13 +37,18 @@ class API
    * Mindbody API Endpoint
    * @var string
    */
-  private static $endpoint = 'https://api.mindbodyonline.com/0_5/';
+  // private static $endpoint = 'https://api.mindbodyonline.com/0_5/';
+  // public static $endpoint = 'http://clients.mindbodyonline.com/api/0_5_1/';
+  // public static $endpoint = 'https://api.mindbodyonline.com/0_5/';
+  public static $endpoint = 'https://api.mindbodyonline.com/0_5_1/';
+
+
 
   /**
    * SOAP options
    * @var array
    */
-  private static $options = array(
+  public static $options = array(
     'soap_version' => SOAP_1_1,
     'trace' => 1
   );
@@ -142,10 +147,12 @@ class API
       foreach( self::$services as $serviceName )
       {
         $this->fetchMethods($serviceName);
+        $this->generateClasses($serviceName);
       }
     }
     else
     {
+      $this->generateClasses($service);
       $this->fetchMethods($service);
     }
 
@@ -155,6 +162,9 @@ class API
 
     
   }
+
+
+  
 
   /**
    * Call magic method
@@ -194,6 +204,12 @@ class API
       $client = new \SoapClient($wdsl, self::$options);
 
       $methods = $client->__getFunctions();
+
+      // $types = $client->__getTypes();
+
+      echo '<pre>';
+      print_r($types);
+      echo '</pre>';
 
       $serviceMethods = array();
 
@@ -240,11 +256,7 @@ class API
       $args = $this->requestArgs( $args );
       
       $request = array( 'Request' => $args );
-
-      echo '<pre>';
-      var_dump($request);
-      echo '</pre>';
-
+      
       try 
       {
         // $this->result = $this->client->__soapCall( $method, $request, array(), array(), $this->response_headers );
@@ -258,13 +270,15 @@ class API
         
       } 
       catch ( \SoapFault $e ) 
-      {
+      { 
+        echo 'SOAPFAULT: ';
         echo $e->getMessage();
         $this->setError( $e->getMessage(), $e->getCode() );
         return FALSE;
       }
       catch ( \Exception $e )
       { 
+        echo 'EXCEPTION: ';
         echo $e->getMessage();
         $this->setError( $e->getMessage(), $e->getCode() );
         return FALSE;
@@ -272,6 +286,21 @@ class API
     }
 
     return FALSE;
+
+  }
+
+
+  public function requestObject( $var )
+  {
+    if( is_array($var) ) { 
+      $var = (object) $var;
+
+      foreach($var as $key => $val){
+        $var->{$key} = $this->requestObject($val);
+      }
+    }
+
+    return $var;
 
   }
 

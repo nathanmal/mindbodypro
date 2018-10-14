@@ -23,6 +23,14 @@ class Cache
    */
   private static $cache_expire  = 3600;
 
+  /**
+   * A list of method calls that shouldn't be cached
+   * @var array
+   */
+  private static $no_cache = array(
+    'ValidateLogin'
+  );
+
 
   /**
    * Get a cached value
@@ -32,7 +40,7 @@ class Cache
    */
   public static function get( $method, $args = array() )
   {
-    if( ! self::$cache_enabled ) return FALSE;
+    if( ! self::$cache_enabled OR in_array($method, Cache::$no_cache)) return FALSE;
 
     $transient = self::transient($method, $args);
 
@@ -49,7 +57,7 @@ class Cache
    */
   public static function set( $method, $args = array(), $value = NULL, $expire = NULL )
   {
-    if( ! self::$cache_enabled ) return FALSE;
+    if( ! self::$cache_enabled OR in_array($method, Cache::$no_cache) ) return FALSE;
 
     $transient = self::transient($method, $args);
 
@@ -81,7 +89,7 @@ class Cache
   {
     $str = $method;
 
-    if( ! empty($args) ) $str .= '-' . json_encode($args);
+    if( ! empty($args) ) $str .= '-' . serialize($args);
 
     $hash = md5($str);
 

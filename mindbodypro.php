@@ -25,6 +25,9 @@ define('MBPRO_DOMAIN', 'mindbodypro');
 // Path to plugin
 define('MBPRO_DIR', plugin_dir_path(__FILE__));
 
+// URL to plugin
+define('MBPRO_URI', plugins_url('mindbodypro/'));
+
 // Path to library
 define('MBPRO_LIB', MBPRO_DIR . 'library/');
 
@@ -32,7 +35,7 @@ define('MBPRO_LIB', MBPRO_DIR . 'library/');
 require( MBPRO_LIB . 'helpers.php');
 
 // Import main plugin class
-require( MBPRO_LIB . 'mindbody.php' );
+require( MBPRO_LIB . 'mindbodypro.php' );
 
 // Set up autoloader
 spl_autoload_register( '\Mindbody::autoload' );
