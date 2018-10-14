@@ -6,7 +6,8 @@
         "vendor-dir": "library/vendor"
     },
     "require": {
-        "devincrossman/mindbody-php-api": "^1.6"
+        "devincrossman/mindbody-php-api": "^1.6",
+        "wsdl2phpgenerator/wsdl2phpgenerator": "^3.4"
     },
     "authors": [
         {
