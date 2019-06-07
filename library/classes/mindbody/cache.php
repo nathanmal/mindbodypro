@@ -1,4 +1,4 @@
-<?php defined('ABSPATH') OR die('Unauthorized Access');
+<?php
 
 namespace Mindbody;
 
@@ -23,13 +23,16 @@ class Cache
    */
   private static $cache_expire  = 3600;
 
+
   /**
-   * A list of method calls that shouldn't be cached
-   * @var array
+   * Only cache "Get" functions
+   * @param  [type] $method [description]
+   * @return [type]         [description]
    */
-  private static $no_cache = array(
-    'ValidateLogin'
-  );
+  public static function shouldCache( $method )
+  {
+    return strpos($method, 'Get') === 0;
+  }
 
 
   /**
@@ -40,7 +43,7 @@ class Cache
    */
   public static function get( $method, $args = array() )
   {
-    if( ! self::$cache_enabled OR in_array($method, Cache::$no_cache)) return FALSE;
+    if( ! self::$cache_enabled OR ! Cache::shouldCache($method) ) return FALSE;
 
     $transient = self::transient($method, $args);
 
@@ -57,7 +60,7 @@ class Cache
    */
   public static function set( $method, $args = array(), $value = NULL, $expire = NULL )
   {
-    if( ! self::$cache_enabled OR in_array($method, Cache::$no_cache) ) return FALSE;
+    if( ! self::$cache_enabled OR ! Cache::shouldCache($method) ) return FALSE;
 
     $transient = self::transient($method, $args);
 

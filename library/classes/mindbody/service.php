@@ -1,9 +1,12 @@
-<?php defined('ABSPATH') OR die('Unauthorized Access');
+<?php
 
 namespace Mindbody;
 
 use \Mindbody\Cache;
 use \Mindbody\API;
+use \Mindbody\Request;
+use \Mindbody\Response;
+use \Mindbody\Result;
 
 /**
  * Main Service class
@@ -45,32 +48,32 @@ class Service
   public $errors = array();
 
   /**
-   * The method last called   
+   * The method called   
    * @var string
    */
-  public $methodName = '';
+  public $method = '';
 
   /**
    * The method object used to call a request
    * @var \Mindbody\Service\<ServiceType>\<Method>
    */
-  public $method;
+  public $requestMethod;
 
   /**
-   * Method Request
+   * Request object
    * @var \Mindbody\Service\<ServiceType>\MBRequest
    */
   public $request;
 
   /**
-   * Result response
+   * Response object
    * @var \Mindbody\Service\<ServiceType>\MBResponse
    */
   public $response;
 
   /**
-   * Formatted result based on response data
-   * @var [type]
+   * Result object
+   * @var \Mindbody\Result;
    */
   public $result;
 
@@ -86,24 +89,37 @@ class Service
    */
   public $sandbox = FALSE;
 
-
   /**
-   * Service constructor
-   * @param [type] $api [description]
+   * Service Constructor
+   * @param string       $service     [description]
+   * @param array        $credentials [description]
+   * @param bool|boolean $sandbox     [description]
+   * @param bool|boolean $testMode    [description]
    */
-  public function __construct( $service, $credentials = array(), $sandbox = FALSE, $testMode = FALSE )
-  {
-    $this->serviceName = strtolower($service);
+  public function __construct( string $service, array $credentials = array(), bool $sandbox = FALSE, bool $testMode = FALSE )
+  { 
+    // Service Name
+    $this->serviceName = ucfirst($service) . 'Service';
 
+    // Load the service
     $this->service = $this->getClass( ucfirst($service) . '_x0020_Service' );
 
+    // Set sandbox
     $this->sandbox = (bool) $sandbox;
 
+    // Set test mode
     $this->testMode = (bool) $testMode;
 
+    // Set credentials
     $this->setCredentials( $credentials );
+
+    // Set sandbox credentials if using sandbox site
+    if( $this->sandbox )
+    {
+      $this->setSandboxUserCredentials();
+    }
   }
-  
+
   /**
    * Perform a service call (magic method)
    * @param  [type] $method [description]
@@ -114,8 +130,6 @@ class Service
   {
     if( method_exists($this->service, $method) )
     {
-      // if( count($args) === 1 && is_array($args[0]) ) $args = $args[0];
-
       return $this->request( $method, $args );
     }
 
@@ -143,7 +157,7 @@ class Service
     $this->request = $this->getClass( $method . 'Request', $args );
 
     // Set method name being called
-    $this->methodName = $method;
+    $this->method = $method;
 
     if( $this->request )
     {
@@ -153,16 +167,8 @@ class Service
         $this->request->setTest(TRUE);
       }
 
-      if( $this->sandbox )
-      {
-        // Sandbox data
-        $this->request->setSourceCredentials( $this->sandboxCredentials() );
-      }
-      else
-      {
-        // Live data
-        $this->request->setSourceCredentials( $this->sourceCredentials );
-      }      
+      // Set source credentials
+      $this->request->setSourceCredentials( $this->sourceCredentials );   
 
       // Set user credentials, if available
       if( ! empty($this->userCredentials) ) 
@@ -184,16 +190,16 @@ class Service
         }
       }
 
-      // Set method object
-      $this->method = $this->getClass( $method, array($this->request) );      
-
       // Check for cached response 
-      $response = $this->cache( $method, $args );
+      $response = $this->cache( $this->method, $args );
 
       // If not cached make the call
       if( empty($response) )
       {
-        $response = $this->service->{$method}($this->method);
+        // Set method object
+        $methodRequest = $this->getClass( $method, array($this->request) );
+        // Get the response
+        $response = $this->service->{$method}($methodRequest);
       }
 
       // Set formatted result
@@ -209,6 +215,44 @@ class Service
 
   }
 
+
+  /**
+   * Generate an instance of a class used by this service
+   * @param  string $class Class Name
+   * @param  array  $args  Arguments to pass to class
+   * @return mixed         Object instance if successful, FALSE if not
+   */
+  public function getClass( $class, $args = array() )
+  {
+    $className = '\\Mindbody\\Service\\' . ucfirst($this->serviceName) . '\\' . ucfirst($class);
+
+    if( class_exists($className) ) 
+    { 
+      $params = $this->getConstructorProperties($className);
+      
+      // Create the instance, unpack args if has constructor parameters
+      $instance = empty($params) ? new $className() : new $className(...$args);
+     
+      foreach( $args as $prop => $val )
+      { 
+        $setMethod = 'set' . ucfirst($prop);
+
+        if( method_exists($instance, $setMethod) )
+        {
+          $instance->{$setMethod}($val);
+        }
+      }
+
+      return $instance;
+    }
+    else
+    {
+      wp_die('Class ' . $className . ' does not exist');
+    }
+
+    return FALSE;
+  }
+
   /**
    * Get formatted result
    * @param string $method   Method called
@@ -216,20 +260,17 @@ class Service
    */
   public function setResult( $method, $response )
   {
-    if( empty($this->result) && ( ! empty($response) && ! empty($method) ) )
-    {
-      $resultClass = '\Mindbody\Result\\' . ucfirst($this->serviceName) . 'ServiceResult';
+    $resultClass = '\Mindbody\Result\\' . $this->serviceName . 'Result';
 
-      if( class_exists($resultClass) ) 
-      {
-        $this->result = new $resultClass($method, $response);
-      } 
-      else
-      {
-        $this->result = new \Mindbody\Result( $method, $response );
-      }
-      
+    if( class_exists($resultClass) ) 
+    {
+      $this->result = new $resultClass($method, $response);
+    } 
+    else
+    {
+      $this->result = new \Mindbody\Result($method, $response);
     }
+      
   }
 
   /**
@@ -243,6 +284,15 @@ class Service
     $this->result->sortBy( $property, $direction );
 
     return $this;
+  }
+
+  /**
+   * Get the request object
+   * @return [type] [description]
+   */
+  public function getRequest()
+  {
+    return $this->request;
   }
 
   /**
@@ -275,9 +325,7 @@ class Service
    */
   public function printData()
   {
-    echo '<pre>';
-    var_dump($this->getData());
-    echo '</pre>';
+    pre($this->getData());
   }
 
 
@@ -382,37 +430,50 @@ class Service
   }
 
   /**
-   * Get sandbox credentials
+   * Sets userCredentials to sandbox
    * @see https://developers.mindbodyonline.com/PublicDocumentation/Testing?version=v5.1
-   * @return \Mindbody\Service\<servicetype>\SourceCredentials
    */
-  public function sandboxCredentials()
+  public function setSandboxUserCredentials()
   {
-    $sourceCredentials = $this->getClass('SourceCredentials');
+    $userCredentials = $this->getClass('UserCredentials');
 
-    $sourceCredentials->setSourceName('Siteowner');
-    $sourceCredentials->setPassword('apitest1234');
-    $sourceCredentials->setSiteIDs( array('-99') );
+    $userCredentials->setUsername( 'Siteowner' );
+    $userCredentials->setPassword( 'apitest1234' );
+    $userCredentials->setSiteIDs( array(-99) );
 
-    return $sourceCredentials;
+    $this->userCredentials = $userCredentials;
   }
 
+
   /**
-   * Generate an instance of a class used by this service
-   * @param  string $class Class Name
-   * @param  array  $args  Arguments to pass to class
-   * @return mixed         Object instance if successful, FALSE if not
+   * Set Staff/Owner credentials
+   * @param array $credentials [description]
    */
-  public function getClass( $class, $args = array() )
+  public function setUserCredentials( $credentials = array() )
   {
-    $className = '\\Mindbody\\Service\\' . ucfirst($this->serviceName) . 'Service\\' . ucfirst($class);
-
-    if( class_exists($className) ) 
+    if( ! empty($credentials) )
     {
-      return new $className(...$args);
-    }
+      $userCredentials = $this->getClass('UserCredentials');
 
-    return FALSE;
+      $userCredentials->setUsername( $credentials['username'] );
+      $userCredentials->setPassword( $credentials['password'] );
+
+      $siteIDs = is_array($credentials['siteIDs']) ? $credentials['siteIDs'] : array($credentials['siteIDs']);
+
+      $userCredentials->setSiteIDs( $siteIDs );
+
+      $this->userCredentials = $userCredentials;
+    }
+  }
+
+
+  public function getConstructorProperties( $class )
+  {
+    $reflector = new \ReflectionClass($class);
+    $constructor = $reflector->getConstructor();
+    $params = $constructor->getParameters();
+    return $params;
+    
   }
 
   /**
@@ -497,6 +558,17 @@ class Service
     echo '<textarea class="widefat" rows="10">';
     echo htmlentities( $this->service->__getLastResponse() );
     echo '</textarea>';
+  }
+
+  /**
+   * Returns true if $array is associative (ie has string keys)
+   * @see    https://stackoverflow.com/questions/173400/how-to-check-if-php-array-is-associative-or-sequential
+   * @param  array  &$array Array to check
+   * @return boolean         [description]
+   */
+  public function isAssociative( array &$array )
+  {
+    return count(array_filter(array_keys($array), 'is_string')) > 0;
   }
 
 

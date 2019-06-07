@@ -1,40 +1,37 @@
+<!-- Registration Form Shortcode -->
 <section id="register">
   
   <h2><?= __('Client Registration') ?></h2>
 
-  <form class="form-register">
-      <!-- Account Details -->
-      <?php 
-      $shortcode->form_input('username', 'User Name', $username, 'text', TRUE, TRUE);
-      $shortcode->form_input('email', 'Email', $email, 'email', TRUE);
-      $shortcode->form_input('password', 'Password', NULL, 'password', TRUE);
-      $shortcode->form_input('confirmpassword', 'Confirm Password', NULL, 'password', TRUE);
-      ?>
-
-      <hr class="my-4">
-      
-      <!-- Personal Details -->
+  <form class="form-register" action="<?=$action?>" method="post">
       
       <?php 
-      $shortcode->form_input('address', 'Address', $address1, 'text', TRUE);
-      $shortcode->form_input('address2', 'Address (Line 2)', $address2, 'text', TRUE);
-      $shortcode->form_input('city', 'City', $city, 'text', TRUE);
-      $shortcode->form_input('state', 'State', $state, 'text', TRUE);
-      $shortcode->form_input('zip', 'Zipcode', $zip, 'text', TRUE);
 
-
+      if( ! empty($errors) )
+      {
+        foreach($errors as $error) {
+          echo '<div class="form-error">' . $error .'</div>';
+        }
+      }
       ?>
 
-      <hr class="my-4">
-
+      <?= $shortcode->render_section('account') ?>
+      <?= $shortcode->render_section('personal') ?>
+      <?= $shortcode->render_section('emergencycontact') ?>
       
+      <!-- Liability Waiver -->
+      <h3><?= __('Liability Waiver') ?></h3>
+
       <div class="liability-waiver">
         <?php include( MBPRO_LIB . 'views/waiver.php'); ?>
       </div>
-
-      <div class="custom-control custom-checkbox mb-3">
-        <input type="checkbox" name="register[agreement]" class="custom-control-input" id="inputAgreement">
-        <label class="custom-control-label" for="inputAgreement">I have read and agree to the PDXStrength liability waiver</label>
+    
+      <?php 
+      $agreerr = isset($errors['agreement']) ? 'error' : '';
+      ?>
+      <div class="custom-control custom-checkbox checkbox-agreement mb-3 <?=$agreerr?>">
+        <input type="checkbox" name="register[liabilityrelease]" class="custom-control-input" id="inputLiabilityRelease">
+        <label class="custom-control-label" for="inputLiabilityRelease">I have read and agree to the PDXStrength liability waiver</label>
       </div>
 
       <hr class="my-4">
@@ -44,7 +41,9 @@
         <label class="custom-control-label" for="newsletter">Subscribe to PDXStrength Newsletter</label>
       </div>
  -->
-      <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button>
+      <input type="hidden" name="register[nonce]" value="<?= $nonce ?>" />
+
+      <button class="btn btn-lg btn-primary btn-block text-uppercase" name="register[submit]" type="submit">Register</button>
     
     </form>
     

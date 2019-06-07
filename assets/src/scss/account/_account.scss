@@ -6,9 +6,20 @@ section#login, section#register
   background:#eee;
   box-shadow:0 2px 5px rgba(0,0,0,0.1), 0 12px 27px rgba(0,0,0,0.12);
   
- 
+  
+  h2, h3 {
+    text-align:center;
+  }
+
+  h2 {
+    padding-top:2rem;
+    margin-bottom:0;
+    padding-bottom:0;
+  }
   h3 {
-    font-size:1rem;
+    font-size: 1rem;
+    margin:1rem 0;
+    opacity: 0.8;
   }
   
   form {
@@ -16,9 +27,18 @@ section#login, section#register
     padding:2rem;
     text-align:center;
     
+
+    select {
+      border-radius:1rem;
+    }
+
     .form-error {
       color:$color-error;
-      padding:1rem;
+      padding:0.25rem 1rem;
+      border:1px solid $color-error;
+      margin-bottom:0.25rem;
+      background:lighten($color-error, 40%);
+      border-radius:1rem;
     }
 
     .btn {
@@ -45,7 +65,6 @@ section#login, section#register
         &::placeholder {
           color:transparent;
         }
-
       }
 
       /* input[type="checkbox"] 
@@ -84,6 +103,16 @@ section#login, section#register
           font-size:0.8rem;
         }
       }
+
+      &.error {
+        input {
+          border-color:$color-error;
+        }
+
+        label {
+          color:$color-error;
+        }
+      }
     }
 
 
@@ -119,5 +148,69 @@ section#login, section#register
     }
 
 
+    .checkbox-agreement
+    {
+      border:1px dashed $color-dark-alt;
+      
+      &.error {
+        border-color: $color-error;
+        background-color: lighten($color-error, 50%);
+      }
+
+      .custom-control-input 
+      {
+        &:checked ~ .custom-control-label {
+
+          &:before {
+
+          }
+
+          &:after {
+            background-color:$color-brand;
+          }
+
+        }
+      }
+
+      label {
+        margin:1rem 0;
+        width:90%;
+        font-weight:bold;
+        cursor: pointer;
+        user-select:none;
+
+        &:before 
+        {
+          padding:0;
+          margin:0;
+          margin-left:0.5rem;
+        }
+        &:after 
+        {
+          background-color:#CCC;
+          border:1px solid #888;
+          margin:0;
+          padding:0;
+          margin-left:0.5rem;
+        }
+
+        &:checked 
+        {
+          &:after {
+            background-color:$color-brand;
+          }
+        }
+      }
+    }
+
+  }
+
+
+  .mindbody {
+    text-align:center;
+    padding:2rem;
+    img {
+      width:240px;
+    }
   }
 }

@@ -1,4 +1,4 @@
-<?php defined('ABSPATH') OR die('Unauthorized Access');
+<?php
 
 namespace Mindbody\Result;
 

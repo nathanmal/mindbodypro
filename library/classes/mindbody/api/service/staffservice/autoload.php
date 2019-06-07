@@ -1,0 +1,97 @@
+<?php
+
+
+ function autoload_534295f162b05d2dbe7d86c0069b99fb($class)
+{
+    $classes = array(
+        'Mindbody\Service\StaffService\Staff_x0020_Service' => __DIR__ .'/Staff_x0020_Service.php',
+        'Mindbody\Service\StaffService\GetStaff' => __DIR__ .'/GetStaff.php',
+        'Mindbody\Service\StaffService\GetStaffRequest' => __DIR__ .'/GetStaffRequest.php',
+        'Mindbody\Service\StaffService\MBRequest' => __DIR__ .'/MBRequest.php',
+        'Mindbody\Service\StaffService\SourceCredentials' => __DIR__ .'/SourceCredentials.php',
+        'Mindbody\Service\StaffService\ArrayOfInt' => __DIR__ .'/ArrayOfInt.php',
+        'Mindbody\Service\StaffService\UserCredentials' => __DIR__ .'/UserCredentials.php',
+        'Mindbody\Service\StaffService\XMLDetailLevel' => __DIR__ .'/XMLDetailLevel.php',
+        'Mindbody\Service\StaffService\ArrayOfString' => __DIR__ .'/ArrayOfString.php',
+        'Mindbody\Service\StaffService\ArrayOfLong' => __DIR__ .'/ArrayOfLong.php',
+        'Mindbody\Service\StaffService\StaffCredentials' => __DIR__ .'/StaffCredentials.php',
+        'Mindbody\Service\StaffService\ArrayOfStaffFilter' => __DIR__ .'/ArrayOfStaffFilter.php',
+        'Mindbody\Service\StaffService\StaffFilter' => __DIR__ .'/StaffFilter.php',
+        'Mindbody\Service\StaffService\GetStaffResponse' => __DIR__ .'/GetStaffResponse.php',
+        'Mindbody\Service\StaffService\GetStaffResult' => __DIR__ .'/GetStaffResult.php',
+        'Mindbody\Service\StaffService\MBResult' => __DIR__ .'/MBResult.php',
+        'Mindbody\Service\StaffService\StatusCode' => __DIR__ .'/StatusCode.php',
+        'Mindbody\Service\StaffService\ArrayOfStaff' => __DIR__ .'/ArrayOfStaff.php',
+        'Mindbody\Service\StaffService\Staff' => __DIR__ .'/Staff.php',
+        'Mindbody\Service\StaffService\MBObject' => __DIR__ .'/MBObject.php',
+        'Mindbody\Service\StaffService\Site' => __DIR__ .'/Site.php',
+        'Mindbody\Service\StaffService\Resource' => __DIR__ .'/Resource.php',
+        'Mindbody\Service\StaffService\ActionCode' => __DIR__ .'/ActionCode.php',
+        'Mindbody\Service\StaffService\ClientService' => __DIR__ .'/ClientService.php',
+        'Mindbody\Service\StaffService\Program' => __DIR__ .'/Program.php',
+        'Mindbody\Service\StaffService\ScheduleType' => __DIR__ .'/ScheduleType.php',
+        'Mindbody\Service\StaffService\SalesRep' => __DIR__ .'/SalesRep.php',
+        'Mindbody\Service\StaffService\Rep' => __DIR__ .'/Rep.php',
+        'Mindbody\Service\StaffService\ClientRelationship' => __DIR__ .'/ClientRelationship.php',
+        'Mindbody\Service\StaffService\Client' => __DIR__ .'/Client.php',
+        'Mindbody\Service\StaffService\ArrayOfClientIndex' => __DIR__ .'/ArrayOfClientIndex.php',
+        'Mindbody\Service\StaffService\ClientIndex' => __DIR__ .'/ClientIndex.php',
+        'Mindbody\Service\StaffService\ArrayOfClientIndexValue' => __DIR__ .'/ArrayOfClientIndexValue.php',
+        'Mindbody\Service\StaffService\ClientIndexValue' => __DIR__ .'/ClientIndexValue.php',
+        'Mindbody\Service\StaffService\ClientCreditCard' => __DIR__ .'/ClientCreditCard.php',
+        'Mindbody\Service\StaffService\ArrayOfClientRelationship' => __DIR__ .'/ArrayOfClientRelationship.php',
+        'Mindbody\Service\StaffService\ArrayOfRep' => __DIR__ .'/ArrayOfRep.php',
+        'Mindbody\Service\StaffService\ArrayOfSalesRep' => __DIR__ .'/ArrayOfSalesRep.php',
+        'Mindbody\Service\StaffService\ArrayOfCustomClientField' => __DIR__ .'/ArrayOfCustomClientField.php',
+        'Mindbody\Service\StaffService\CustomClientField' => __DIR__ .'/CustomClientField.php',
+        'Mindbody\Service\StaffService\Liability' => __DIR__ .'/Liability.php',
+        'Mindbody\Service\StaffService\ProspectStage' => __DIR__ .'/ProspectStage.php',
+        'Mindbody\Service\StaffService\Location' => __DIR__ .'/Location.php',
+        'Mindbody\Service\StaffService\Relationship' => __DIR__ .'/Relationship.php',
+        'Mindbody\Service\StaffService\SessionType' => __DIR__ .'/SessionType.php',
+        'Mindbody\Service\StaffService\ScheduleItem' => __DIR__ .'/ScheduleItem.php',
+        'Mindbody\Service\StaffService\Appointment' => __DIR__ .'/Appointment.php',
+        'Mindbody\Service\StaffService\AppointmentStatus' => __DIR__ .'/AppointmentStatus.php',
+        'Mindbody\Service\StaffService\ArrayOfResource' => __DIR__ .'/ArrayOfResource.php',
+        'Mindbody\Service\StaffService\Unavailability' => __DIR__ .'/Unavailability.php',
+        'Mindbody\Service\StaffService\Availability' => __DIR__ .'/Availability.php',
+        'Mindbody\Service\StaffService\ArrayOfProgram' => __DIR__ .'/ArrayOfProgram.php',
+        'Mindbody\Service\StaffService\ArrayOfAppointment' => __DIR__ .'/ArrayOfAppointment.php',
+        'Mindbody\Service\StaffService\ArrayOfUnavailability' => __DIR__ .'/ArrayOfUnavailability.php',
+        'Mindbody\Service\StaffService\ArrayOfAvailability' => __DIR__ .'/ArrayOfAvailability.php',
+        'Mindbody\Service\StaffService\ArrayOfLocation' => __DIR__ .'/ArrayOfLocation.php',
+        'Mindbody\Service\StaffService\ArrayOfProviderIDUpdate' => __DIR__ .'/ArrayOfProviderIDUpdate.php',
+        'Mindbody\Service\StaffService\ProviderIDUpdate' => __DIR__ .'/ProviderIDUpdate.php',
+        'Mindbody\Service\StaffService\GetStaffPermissions' => __DIR__ .'/GetStaffPermissions.php',
+        'Mindbody\Service\StaffService\GetStaffPermissionsRequest' => __DIR__ .'/GetStaffPermissionsRequest.php',
+        'Mindbody\Service\StaffService\GetStaffPermissionsResponse' => __DIR__ .'/GetStaffPermissionsResponse.php',
+        'Mindbody\Service\StaffService\GetStaffPermissionsResult' => __DIR__ .'/GetStaffPermissionsResult.php',
+        'Mindbody\Service\StaffService\ArrayOfPermission' => __DIR__ .'/ArrayOfPermission.php',
+        'Mindbody\Service\StaffService\Permission' => __DIR__ .'/Permission.php',
+        'Mindbody\Service\StaffService\AddOrUpdateStaff' => __DIR__ .'/AddOrUpdateStaff.php',
+        'Mindbody\Service\StaffService\AddOrUpdateStaffRequest' => __DIR__ .'/AddOrUpdateStaffRequest.php',
+        'Mindbody\Service\StaffService\AddOrUpdateStaffResponse' => __DIR__ .'/AddOrUpdateStaffResponse.php',
+        'Mindbody\Service\StaffService\AddOrUpdateStaffResult' => __DIR__ .'/AddOrUpdateStaffResult.php',
+        'Mindbody\Service\StaffService\GetStaffImgURL' => __DIR__ .'/GetStaffImgURL.php',
+        'Mindbody\Service\StaffService\GetStaffImgURLRequest' => __DIR__ .'/GetStaffImgURLRequest.php',
+        'Mindbody\Service\StaffService\GetStaffImgURLResponse' => __DIR__ .'/GetStaffImgURLResponse.php',
+        'Mindbody\Service\StaffService\GetStaffImgURLResult' => __DIR__ .'/GetStaffImgURLResult.php',
+        'Mindbody\Service\StaffService\ValidateStaffLogin' => __DIR__ .'/ValidateStaffLogin.php',
+        'Mindbody\Service\StaffService\ValidateLoginRequest' => __DIR__ .'/ValidateLoginRequest.php',
+        'Mindbody\Service\StaffService\ValidateStaffLoginResponse' => __DIR__ .'/ValidateStaffLoginResponse.php',
+        'Mindbody\Service\StaffService\ValidateLoginResult' => __DIR__ .'/ValidateLoginResult.php',
+        'Mindbody\Service\StaffService\GetSalesReps' => __DIR__ .'/GetSalesReps.php',
+        'Mindbody\Service\StaffService\GetSalesRepsRequest' => __DIR__ .'/GetSalesRepsRequest.php',
+        'Mindbody\Service\StaffService\GetSalesRepsResponse' => __DIR__ .'/GetSalesRepsResponse.php',
+        'Mindbody\Service\StaffService\GetSalesRepsResult' => __DIR__ .'/GetSalesRepsResult.php'
+    );
+    if (!empty($classes[$class])) {
+        include $classes[$class];
+    };
+}
+
+spl_autoload_register('autoload_534295f162b05d2dbe7d86c0069b99fb');
+
+// Do nothing. The rest is just leftovers from the code generation.
+{
+}

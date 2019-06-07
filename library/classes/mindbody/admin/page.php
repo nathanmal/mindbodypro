@@ -1,4 +1,4 @@
-<?php defined('ABSPATH') OR die('Unauthorized Access');
+<?php
 
 namespace Mindbody\Admin;
 
@@ -60,9 +60,9 @@ abstract class Page
    * Admin page constructor
    * @return [type] [description]
    */
-  public function __construct( $slug )
+  public function __construct( )
   {   
-      $this->slug = $slug;
+      $this->slug = strtolower(get_class_name($this));
 
       if( empty($this->title) ) $this->title = ucfirst($this->slug);
 

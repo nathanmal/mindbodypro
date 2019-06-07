@@ -32,6 +32,20 @@ final class Mindbody {
 
 
   /**
+   * Whether to use sandbox mode
+   * @var boolean
+   */
+  public static $sandbox = FALSE;
+
+
+  /**
+   * Whether to use test mode
+   * @var boolean
+   */
+  public static $testMode = FALSE;
+
+
+  /**
    * The API Object
    * @var [type]
    */
@@ -48,10 +62,13 @@ final class Mindbody {
     Shortcode::init();
 
     // Add the client role
-    Client::add_client_role();
+    Client::addClientRole();
 
     // Enqueue assets
     Mindbody::enqueue();
+
+    // Report all errors except E_NOTICE
+    error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
 
     // Initialize admin if we're on the dashboard
     if( is_admin() ) Admin::init();
@@ -63,7 +80,8 @@ final class Mindbody {
    */
   public static function enqueue()
   {
-    wp_enqueue_script('mindbodypro', Mindbody::asset('dist/mindbodypro.js'), array('jquery'), NULL, TRUE);
+    wp_enqueue_script('mindbodypro', Mindbody::asset('dist/mindbodypro.js'), array('jquery-core'), '1.0', TRUE);
+    // wp_enqueue_script('test', Mindbody::asset('dist/test.js'), array('jquery'), '1.0', TRUE);
     wp_enqueue_style('mindbodypro', Mindbody::asset('dist/mindbodypro.css'), array('bootstrap'));
   }
 
@@ -77,6 +95,26 @@ final class Mindbody {
     return MBPRO_URI . 'assets/' . $path;
   }
 
+  /**
+   * Enable/disable sandbox mode
+   * @param  [type] $use [description]
+   * @return [type]      [description]
+   */
+  public static function useSandbox( $use )
+  {
+    Mindbody::$sandbox = (bool) $use;
+  }
+
+  /**
+   * Enable/disable test mode
+   * @param  [type] $test [description]
+   * @return [type]       [description]
+   */
+  public static function useTestMode( $test )
+  {
+    Mindbody::$testMode = (bool) $test;
+  }
+
 
   /**
    * Get an instance of a Mindbody Service
@@ -85,11 +123,11 @@ final class Mindbody {
    * @param  bool   $testMode use test mode with specific calls
    * @return object       The SoapClient service instance
    */
-  public static function service( $name, $sandbox = FALSE, $testMode = FALSE )
+  public static function service( $name )
   { 
     if( isset(self::$services[$name]) ) return self::$services[$name];
 
-    self::$services[$name] = new Service($name, Mindbody::credentials(), $sandbox, $testMode );
+    self::$services[$name] = new Service($name, Mindbody::credentials(), Mindbody::$sandbox, Mindbody::$testMode );
 
     return self::$services[$name];
   }
@@ -121,13 +159,10 @@ final class Mindbody {
    */
   public static function autoload( $class )
   {
-    $path = strtolower($class);
+    $path = MBPRO_LIB . 'classes/' .  str_replace('\\','/', strtolower($class)) . '.php';
 
-    $path = MBPRO_LIB . 'classes/' .  str_replace('\\','/',$path) . '.php';
+    if( is_file($path) ) require($path);
 
-    if( is_file($path) ) {
-      require($path);
-    } 
   }
 
   /**
@@ -136,11 +171,13 @@ final class Mindbody {
    */
   public static function credentials()
   {
-    return array(
-      'SourceName' => Mindbody::$api_sourcename,
-      'Password'   => Mindbody::$api_key,
-      'SiteIDs'    => Mindbody::$api_siteID
-    );
+    $credentials = array();
+
+    $credentials['SourceName'] = Mindbody::$api_sourcename;
+    $credentials['Password']   = Mindbody::$api_key;
+    $credentials['SiteIDs']    = Mindbody::$sandbox ? array(-99) : Mindbody::$api_siteID;
+
+    return $credentials;
   }
 
   /**

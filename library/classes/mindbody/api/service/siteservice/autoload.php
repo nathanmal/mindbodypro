@@ -1,0 +1,97 @@
+<?php
+
+
+ function autoload_e67057fe7072a2fc81ab15196589a466($class)
+{
+    $classes = array(
+        'Mindbody\Service\SiteService\Site_x0020_Service' => __DIR__ .'/Site_x0020_Service.php',
+        'Mindbody\Service\SiteService\GetSites' => __DIR__ .'/GetSites.php',
+        'Mindbody\Service\SiteService\GetSitesRequest' => __DIR__ .'/GetSitesRequest.php',
+        'Mindbody\Service\SiteService\MBRequest' => __DIR__ .'/MBRequest.php',
+        'Mindbody\Service\SiteService\SourceCredentials' => __DIR__ .'/SourceCredentials.php',
+        'Mindbody\Service\SiteService\ArrayOfInt' => __DIR__ .'/ArrayOfInt.php',
+        'Mindbody\Service\SiteService\UserCredentials' => __DIR__ .'/UserCredentials.php',
+        'Mindbody\Service\SiteService\XMLDetailLevel' => __DIR__ .'/XMLDetailLevel.php',
+        'Mindbody\Service\SiteService\ArrayOfString' => __DIR__ .'/ArrayOfString.php',
+        'Mindbody\Service\SiteService\GetSitesResponse' => __DIR__ .'/GetSitesResponse.php',
+        'Mindbody\Service\SiteService\GetSitesResult' => __DIR__ .'/GetSitesResult.php',
+        'Mindbody\Service\SiteService\MBResult' => __DIR__ .'/MBResult.php',
+        'Mindbody\Service\SiteService\StatusCode' => __DIR__ .'/StatusCode.php',
+        'Mindbody\Service\SiteService\ArrayOfSite' => __DIR__ .'/ArrayOfSite.php',
+        'Mindbody\Service\SiteService\Site' => __DIR__ .'/Site.php',
+        'Mindbody\Service\SiteService\GetLocations' => __DIR__ .'/GetLocations.php',
+        'Mindbody\Service\SiteService\GetLocationsRequest' => __DIR__ .'/GetLocationsRequest.php',
+        'Mindbody\Service\SiteService\GetLocationsResponse' => __DIR__ .'/GetLocationsResponse.php',
+        'Mindbody\Service\SiteService\GetLocationsResult' => __DIR__ .'/GetLocationsResult.php',
+        'Mindbody\Service\SiteService\ArrayOfLocation' => __DIR__ .'/ArrayOfLocation.php',
+        'Mindbody\Service\SiteService\Location' => __DIR__ .'/Location.php',
+        'Mindbody\Service\SiteService\MBObject' => __DIR__ .'/MBObject.php',
+        'Mindbody\Service\SiteService\ActionCode' => __DIR__ .'/ActionCode.php',
+        'Mindbody\Service\SiteService\GetActivationCode' => __DIR__ .'/GetActivationCode.php',
+        'Mindbody\Service\SiteService\GetActivationCodeRequest' => __DIR__ .'/GetActivationCodeRequest.php',
+        'Mindbody\Service\SiteService\GetActivationCodeResponse' => __DIR__ .'/GetActivationCodeResponse.php',
+        'Mindbody\Service\SiteService\GetActivationCodeResult' => __DIR__ .'/GetActivationCodeResult.php',
+        'Mindbody\Service\SiteService\GetPrograms' => __DIR__ .'/GetPrograms.php',
+        'Mindbody\Service\SiteService\GetProgramsRequest' => __DIR__ .'/GetProgramsRequest.php',
+        'Mindbody\Service\SiteService\ScheduleType' => __DIR__ .'/ScheduleType.php',
+        'Mindbody\Service\SiteService\GetProgramsResponse' => __DIR__ .'/GetProgramsResponse.php',
+        'Mindbody\Service\SiteService\GetProgramsResult' => __DIR__ .'/GetProgramsResult.php',
+        'Mindbody\Service\SiteService\ArrayOfProgram' => __DIR__ .'/ArrayOfProgram.php',
+        'Mindbody\Service\SiteService\Program' => __DIR__ .'/Program.php',
+        'Mindbody\Service\SiteService\GetSessionTypes' => __DIR__ .'/GetSessionTypes.php',
+        'Mindbody\Service\SiteService\GetSessionTypesRequest' => __DIR__ .'/GetSessionTypesRequest.php',
+        'Mindbody\Service\SiteService\GetSessionTypesResponse' => __DIR__ .'/GetSessionTypesResponse.php',
+        'Mindbody\Service\SiteService\GetSessionTypesResult' => __DIR__ .'/GetSessionTypesResult.php',
+        'Mindbody\Service\SiteService\ArrayOfSessionType' => __DIR__ .'/ArrayOfSessionType.php',
+        'Mindbody\Service\SiteService\SessionType' => __DIR__ .'/SessionType.php',
+        'Mindbody\Service\SiteService\GetResources' => __DIR__ .'/GetResources.php',
+        'Mindbody\Service\SiteService\GetResourcesRequest' => __DIR__ .'/GetResourcesRequest.php',
+        'Mindbody\Service\SiteService\GetResourcesResponse' => __DIR__ .'/GetResourcesResponse.php',
+        'Mindbody\Service\SiteService\GetResourcesResult' => __DIR__ .'/GetResourcesResult.php',
+        'Mindbody\Service\SiteService\ArrayOfResource' => __DIR__ .'/ArrayOfResource.php',
+        'Mindbody\Service\SiteService\Resource' => __DIR__ .'/Resource.php',
+        'Mindbody\Service\SiteService\GetRelationships' => __DIR__ .'/GetRelationships.php',
+        'Mindbody\Service\SiteService\GetRelationshipsRequest' => __DIR__ .'/GetRelationshipsRequest.php',
+        'Mindbody\Service\SiteService\GetRelationshipsResponse' => __DIR__ .'/GetRelationshipsResponse.php',
+        'Mindbody\Service\SiteService\GetRelationshipsResult' => __DIR__ .'/GetRelationshipsResult.php',
+        'Mindbody\Service\SiteService\ArrayOfRelationship' => __DIR__ .'/ArrayOfRelationship.php',
+        'Mindbody\Service\SiteService\Relationship' => __DIR__ .'/Relationship.php',
+        'Mindbody\Service\SiteService\GetResourceSchedule' => __DIR__ .'/GetResourceSchedule.php',
+        'Mindbody\Service\SiteService\GetResourceScheduleRequest' => __DIR__ .'/GetResourceScheduleRequest.php',
+        'Mindbody\Service\SiteService\GetResourceScheduleResponse' => __DIR__ .'/GetResourceScheduleResponse.php',
+        'Mindbody\Service\SiteService\GetResourceScheduleResult' => __DIR__ .'/GetResourceScheduleResult.php',
+        'Mindbody\Service\SiteService\ReserveResource' => __DIR__ .'/ReserveResource.php',
+        'Mindbody\Service\SiteService\ReserveResourceRequest' => __DIR__ .'/ReserveResourceRequest.php',
+        'Mindbody\Service\SiteService\ReserveResourceResponse' => __DIR__ .'/ReserveResourceResponse.php',
+        'Mindbody\Service\SiteService\ReserveResourceResult' => __DIR__ .'/ReserveResourceResult.php',
+        'Mindbody\Service\SiteService\GetMobileProviders' => __DIR__ .'/GetMobileProviders.php',
+        'Mindbody\Service\SiteService\GetMobileProvidersRequest' => __DIR__ .'/GetMobileProvidersRequest.php',
+        'Mindbody\Service\SiteService\GetMobileProvidersResponse' => __DIR__ .'/GetMobileProvidersResponse.php',
+        'Mindbody\Service\SiteService\GetMobileProvidersResult' => __DIR__ .'/GetMobileProvidersResult.php',
+        'Mindbody\Service\SiteService\ArrayOfMobileProvider' => __DIR__ .'/ArrayOfMobileProvider.php',
+        'Mindbody\Service\SiteService\MobileProvider' => __DIR__ .'/MobileProvider.php',
+        'Mindbody\Service\SiteService\GetProspectStages' => __DIR__ .'/GetProspectStages.php',
+        'Mindbody\Service\SiteService\GetProspectStagesRequest' => __DIR__ .'/GetProspectStagesRequest.php',
+        'Mindbody\Service\SiteService\GetProspectStagesResponse' => __DIR__ .'/GetProspectStagesResponse.php',
+        'Mindbody\Service\SiteService\GetProspectStagesResult' => __DIR__ .'/GetProspectStagesResult.php',
+        'Mindbody\Service\SiteService\ArrayOfProspectStage' => __DIR__ .'/ArrayOfProspectStage.php',
+        'Mindbody\Service\SiteService\ProspectStage' => __DIR__ .'/ProspectStage.php',
+        'Mindbody\Service\SiteService\GetGenders' => __DIR__ .'/GetGenders.php',
+        'Mindbody\Service\SiteService\GetGendersRequest' => __DIR__ .'/GetGendersRequest.php',
+        'Mindbody\Service\SiteService\GetGendersResponse' => __DIR__ .'/GetGendersResponse.php',
+        'Mindbody\Service\SiteService\GetGendersResult' => __DIR__ .'/GetGendersResult.php',
+        'Mindbody\Service\SiteService\ArrayOfGenderOption' => __DIR__ .'/ArrayOfGenderOption.php',
+        'Mindbody\Service\SiteService\GenderOption' => __DIR__ .'/GenderOption.php',
+        'Mindbody\Service\SiteService\Row' => __DIR__ .'/Row.php',
+        'Mindbody\Service\SiteService\RecordSet' => __DIR__ .'/RecordSet.php'
+    );
+    if (!empty($classes[$class])) {
+        include $classes[$class];
+    };
+}
+
+spl_autoload_register('autoload_e67057fe7072a2fc81ab15196589a466');
+
+// Do nothing. The rest is just leftovers from the code generation.
+{
+}

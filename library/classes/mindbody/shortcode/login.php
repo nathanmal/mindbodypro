@@ -1,4 +1,4 @@
-<?php defined('ABSPATH') OR die('Unauthorized Access');
+<?php
 
 namespace Mindbody\Shortcode;
 
@@ -80,17 +80,17 @@ class Login extends Shortcode
 
       if( empty($user) )
       {
-        $this->errors[] = __("Invalid username");
+        $this->errors['username'] = __("Invalid username");
         return FALSE;
       }
 
       if( empty($pass) )
       {
-        $this->errors[] = __("Invalid password");
+        $this->errors['password'] = __("Invalid password");
         return FALSE;
       }
 
-      $login = Client::validate_login( $user, $pass );
+      $login = Client::validateLogin( $user, $pass );
 
       // Check that the login works on mindbody
       if( $login->success() )
@@ -101,8 +101,6 @@ class Login extends Shortcode
       }
       else
       {
-
-
         $this->errors[] = __( $login->getData()->getMessage() );
 
         return FALSE;

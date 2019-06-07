@@ -1,4 +1,4 @@
-<?php defined('ABSPATH') OR die('Unauthorized Access');
+<?php
 
 namespace Mindbody;
 
@@ -6,7 +6,7 @@ class Admin
 {
 
   public static $pages = array(
-    'settings','import'
+    'settings','import','data'
   );
 
   /**
@@ -15,6 +15,10 @@ class Admin
    */
   private static $_pages = array();
 
+
+
+  private static $debugs = array();
+
   // initialize admin functions/menu
   public static function init()
   {
@@ -22,7 +26,9 @@ class Admin
     $admin = '\\Mindbody\\Admin';
 
     // Adds settings menu
-    add_action( 'admin_menu', array($admin, 'create_menus'), 10 );
+    add_action( 'admin_menu', array( $admin, 'create_menus' ), 10 );
+
+    add_action( 'admin_notices', array( $admin, 'notices' ), 999 );
   }
 
   /**
@@ -46,7 +52,28 @@ class Admin
     {
       $class = '\\Mindbody\\Admin\\' . ucfirst($slug);
 
-      self::$_pages[$slug] = new $class($slug);
+      self::$_pages[$slug] = new $class();
+    }
+  }
+
+
+  public static function debug( $var, $key = NULL )
+  { 
+    if( ! is_null($key) ) {
+      Admin::$debugs[$key] = pre($var, TRUE);
+    } else {
+      Admin::$debugs[] = pre($var, TRUE);
+    }
+    
+  }
+
+
+  public static function notices()
+  {
+    if( ! empty(Admin::$debugs) ) {
+      foreach(Admin::$debugs as $debug){
+        echo $debug;
+      }
     }
   }
 }

@@ -1,4 +1,4 @@
-<?php defined('ABSPATH') OR die('Unauthorized Access');
+<?php
 
 namespace Mindbody\Shortcode;
 
@@ -27,6 +27,8 @@ class Classes extends Shortcode
 
 
     $startdate = new DateTime($start);
+    //echo 'DATE: ';
+    //echo $startdate->format('Y-m-d');
 
     if( empty($end) ) 
     {
@@ -46,9 +48,16 @@ class Classes extends Shortcode
     $params['StartDateTime'] = $startdate;
     $params['EndDateTime'] = $enddate;
 
-
     // Make the call
     $classes = $service->GetClasses( $params );
+
+
+
+
+   // pre($service->getRequest());
+
+
+   // pre($service->getResponse());
 
     if( $classes )
     {

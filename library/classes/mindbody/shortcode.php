@@ -1,4 +1,4 @@
-<?php defined('ABSPATH') OR die('Unauthorized Access');
+<?php
 
 namespace Mindbody;
 
@@ -12,7 +12,9 @@ class Shortcode
   private static $shortcodes = array(
     'classes',
     'login',
-    'register'
+    'logout',
+    'register',
+    'account'
   );
 
   /**

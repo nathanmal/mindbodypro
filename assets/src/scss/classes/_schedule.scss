@@ -6,45 +6,153 @@ section#schedule
   }
 
 
-  .daily-schedule 
-  {
-    table.table 
-    {
-      margin-top:1rem;
-      
-      thead 
-      {
-        tr {
-          text-transform: uppercase;
-          
-          th {
-            color:white;
-            background-color:$color-dark;
-            white-space: nowrap;
-          }
+  table.table-schedule {
+    
+    margin-top:1rem;
+    transform-style: preserve-3d;
+    overflow:visible;
+    position:relative;
 
-          th:last-child {
-            text-align:right;
-          }
+    thead {
+      //transform-style: preserve-3d;
+      transform: translate3d(0, 0, 1px);
+      position:relative;
+      z-index:3;
+      tr {
+        text-transform: uppercase;
+        
+        th {
+          color:white;
+          background-color:$color-dark;
+          white-space: nowrap;
         }
-      }
 
-
-      
-
-      tbody tr {
-
-        td {
-          vertical-align: middle;
-        }
-        td:last-child {
+        th:last-child {
           text-align:right;
         }
       }
 
+      tr.date-header th {
+        text-align:center;
+      }
+
+      tr.detail-header th {
+        background:#666;
+      }
     }
-  
 
 
+    tbody {
+      transform: translate3d(0, 0, -1px);
+      position:relative;
+      z-index:2;
+
+      //transform-style: preserve-3d;
+      tr {
+        td {
+          vertical-align: middle;
+        }
+
+        td.class-time {
+          span.class-duration {
+            display:block;
+            font-size:0.8rem;
+          }
+        }
+
+        td:last-child {
+          text-align:right;
+        }
+      }
+      
+    }
+
+
+
+
+    @media only screen and (max-width: 600px) {
+      
+      display:block;
+      position:relative;
+      min-width:320px;
+
+      thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      thead {
+
+        tr.detail-header {
+          position:absolute;
+          top:-9999px;
+        }
+
+        tr.date-header {
+          position:relative;
+          top:0;
+        }
+        
+      }
+
+
+
+      tbody {
+
+        tr {
+
+          border:1px solid #ccc;
+          margin-bottom:1rem;
+
+
+          td {
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            text-align:right;
+            background-color:white;
+            
+            &:before{
+              position:absolute;
+              left:0;
+              top:0;
+              bottom:0;
+              display:flex;
+              align-items: center;
+              justify-content: flex-start;
+              width:80px;
+              font-weight:bold;
+              padding:0 1rem;
+              
+            }
+
+            &:nth-child(odd){
+              background:#eee;
+            }
+            
+            &.class-time:before {
+              content: "Time:";
+            }
+
+            &.class-name:before {
+              content: "Class:";
+            }
+
+            &.class-staff:before {
+              content: "Coach:";
+            }
+
+            &.class-enroll {
+              a {
+                display:block;
+              }
+            }
+            
+          }
+
+        }
+      }
+
+    
+    }
   }
 }
